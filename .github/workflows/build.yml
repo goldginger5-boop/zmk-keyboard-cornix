@@ -7,7 +7,9 @@ on:
       - "config/*"
     tags-ignore:
       - "*"
-
+env:
+  TZ: "Asia/Tokyo"
+  
 jobs:
   build:
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
