@@ -13,9 +13,10 @@
 #
 ---
 include:
-  # --- ドングル本体 ---
+  # --- ドングル本体（画面描画をOFFにしてビルドを通す） ---
   - board: nice_nano/nrf52840/zmk
     shield: cornix_dongle_adapter
+    cmake-args: -DCONFIG_ZMK_DISPLAY=n
     artifact-name: cornix_dongle_nosd
 
   - board: cornix_left
