@@ -14,7 +14,7 @@
 ---
 include:
   # --- ドングル本体 ---
-  - board: nice_nano
+  - board: nice_nano/zmk
     shield: cornix_dongle_adapter
     artifact-name: cornix_dongle_nosd
 
@@ -36,6 +36,6 @@ include:
     artifact-name: cornix_reset
 
   # --- ドングル初期化用リセットUF2 ---
-  - board: nice_nano
+  - board: nice_nano/zmk
     shield: settings_reset
     artifact-name: reset_nicenano_nosd
