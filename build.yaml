@@ -13,10 +13,10 @@
 #
 ---
 include:
-  # --- ドングル本体（画面なし・Zephyr 4対応版） ---
-  - board: nice_nano_v2
+  # --- ドングル本体 ---
+  - board: nice_nano
     shield: cornix_dongle_adapter
-    artifact-name: cornix_dongle_nice_nano
+    artifact-name: cornix_dongle_nosd
 
   - board: cornix_left
     # shield: cornix_indicator
@@ -36,6 +36,6 @@ include:
     artifact-name: cornix_reset
 
   # --- ドングル初期化用リセットUF2 ---
-  - board: nice_nano_v2
+  - board: nice_nano
     shield: settings_reset
-    artifact-name: reset_nicenano
+    artifact-name: reset_nicenano_nosd
