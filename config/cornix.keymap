@@ -28,51 +28,57 @@
         };
     };
 
-// --- Tap Dance 定義 ---
+    // --- Hold-Tap / Tap-Dance 定義 ---
     behaviors {
-        td0: td_tab_mo1 {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <250>;
-            bindings = <&kp TAB>, <&mo 1>;
+        // レイヤーホールド / キー単押し
+        lt_tab: lt_tab {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            bindings = <&mo>, <&kp>;
         };
-        td1: td_caps_tg1 {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <250>;
-            bindings = <&kp CAPSLOCK>, <&mo 1>, <&tog 1>;
+        lt_bspc: lt_bspc {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            bindings = <&mo>, <&kp>;
         };
-        td2: td_bspc_mo1 {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <250>;
-            bindings = <&kp BSPC>, <&mo 1>;
+
+        // Mod-Tap
+        mt_shift: mt_shift {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            bindings = <&kp>, <&kp>;
         };
-        td4: td_minus_rshift {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <250>;
-            bindings = <&kp MINUS>, <&kp RSHIFT>;
+        mt_ctrl: mt_ctrl {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            bindings = <&kp>, <&kp>;
         };
-        td5: td_equal_rctrl {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <250>;
-            bindings = <&kp EQUAL>, <&kp RCTRL>;
+
+        // 単押し言語切替 / ホールドでレイヤー
+        lt_lang2: lt_lang2 {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            bindings = <&mo>, <&kp>;
         };
-        td6: td_lang2_sym2 {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <250>;
-            bindings = <&kp INT_MUHENKAN>, <&mo 3>, <&tog 3>;
-        };
-        td7: td_lang1_sym1 {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <250>;
-            bindings = <&kp INT_HENKAN>, <&mo 2>, <&tog 2>;
+        lt_lang1: lt_lang1 {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            bindings = <&mo>, <&kp>;
         };
     };
+
     // --- Combos (同時押し) 定義 ---
     combos {
         compatible = "zmk,combos";
@@ -91,7 +97,7 @@
         combo_rbrc  { timeout-ms = <50>; key-positions = <31 32 33>; bindings = <&kp RBRC>; layers = <0 1>; }; // M + COMMA + DOT -> }
         combo_rbkt  { timeout-ms = <50>; key-positions = <31 32 33 34>; bindings = <&kp RBKT>; layers = <0 1>; }; // M + COMMA + DOT + FSLH -> ]
 
-        combo_to_num { timeout-ms = <50>; key-positions = <40 43>; bindings = <&to L_NUM>; layers = <0 1 2 3>; }; // TD6 + TD7
+        combo_to_num { timeout-ms = <50>; key-positions = <40 43>; bindings = <&to L_NUM>; layers = <0 1 2 3>; }; // 親指両押しでNumPadへ
     };
 
     keymap {
@@ -101,10 +107,10 @@
         default_layer {
             display-name = "Base";
             bindings = <
-&td0       &kp Q      &kp W      &kp E       &kp R     &kp T                                        &kp Y     &kp U     &kp I      &kp O      &kp P         &td2
-&td1       &kp A      &kp S      &kp D       &kp F     &kp G                                        &kp H     &kp J     &kp K      &kp L      &kp BSLH      &kp RET
-&kp LSHFT  &kp Z      &kp X      &kp C       &kp V     &kp B      &kp C_MUTE &mkp MB3               &kp N     &kp M     &kp COMMA  &kp DOT    &kp FSLH      &td4
-&kp LCTRL  &kp LALT   &kp LGUI   &kp SEMI    &td6      &kp SPACE                                    &kp SPACE &td7      &kp SQT    &kp LBKT   &kp RBKT      &td5
+&lt_tab L_NAV TAB   &kp Q      &kp W      &kp E       &kp R     &kp T                                        &kp Y     &kp U     &kp I      &kp O      &kp P         &lt_bspc L_NAV BSPC
+&kp CAPSLOCK        &kp A      &kp S      &kp D       &kp F     &kp G                                        &kp H     &kp J     &kp K      &kp L      &kp BSLH      &kp RET
+&kp LSHFT           &kp Z      &kp X      &kp C       &kp V     &kp B      &kp C_MUTE &mkp MB3               &kp N     &kp M     &kp COMMA  &kp DOT    &kp FSLH      &mt_shift RSHIFT MINUS
+&kp LCTRL           &kp LALT   &kp LGUI   &kp SEMI    &lt_lang2 L_SYM2 INT_MUHENKAN &kp SPACE                &kp SPACE &lt_lang1 L_SYM1 INT_HENKAN &kp SQT &kp LBKT &kp RBKT &mt_ctrl RCTRL EQUAL
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP &inc_dec_kp PG_UP PG_DN>;
         };
@@ -114,9 +120,9 @@
             display-name = "Navi";
             bindings = <
 &kp ESC    &kp F1        &kp F2        &kp F3     &kp F4    &kp F5                                  &kp F6    &kp F7    &kp F8     &kp F9     &kp F10       &kp DEL
-&tg L_NAV  &kp ESC       &kp TAB       &kp SPACE  &kp SPACE &kp SPACE                               &kp LEFT  &kp DOWN  &kp UP     &kp RIGHT  &kp RET       &kp RET
+&tog L_NAV &kp ESC       &kp TAB       &kp SPACE  &kp SPACE &kp SPACE                               &kp LEFT  &kp DOWN  &kp UP     &kp RIGHT  &kp RET       &kp RET
 &kp LSHFT  &kp LG(LS(N4)) &kp LG(LS(S)) &m4_gui_alt_k &kp DEL &kp BSPC &kp C_MUTE &mkp MB3          &kp HOME  &kp PG_DN &kp PG_UP  &kp END    &kp LS(FSLH)  &kp RSHFT
-&kp LCTRL  &kp LALT      &kp LGUI      &kp COLON  &td6      &kp SPACE                               &kp SPACE &td7      &kp DQT    &kp LPAR   &kp RPAR      &kp RCTRL
+&kp LCTRL  &kp LALT      &kp LGUI      &kp COLON  &mo L_SYM2 &kp SPACE                              &kp SPACE &mo L_SYM1 &kp DQT   &kp LPAR   &kp RPAR      &kp RCTRL
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP &inc_dec_kp PG_UP PG_DN>;
         };
@@ -128,7 +134,7 @@
 &kp GRAVE  &kp N1        &kp N2        &kp N3     &kp N4    &kp N5                                  &kp N6    &kp N7    &kp N8     &kp N9     &kp N0        &kp BSPC
 &kp CLCK   &none         &none         &none      &kp SEMI  &kp MINUS                               &kp EQUAL &kp SQT   &none      &none      &mkp MB3      &kp RET
 &kp LSHFT  &kp LG(LS(N4)) &kp LG(LS(S)) &m4_gui_alt_k &kp DEL &kp BSPC &kp C_MUTE &mkp MB3          &none     &none     &none      &mkp MB1   &mmv MOVE_UP  &mkp MB2
-&kp LCTRL  &kp LALT      &kp LGUI      &none      &to L_NUM &kp SPACE                               &kp SPACE &tg L_SYM1 &none     &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_RIGHT
+&kp LCTRL  &kp LALT      &kp LGUI      &none      &to L_NUM &kp SPACE                               &kp SPACE &tog L_SYM1 &none    &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_RIGHT
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP &inc_dec_kp PG_UP PG_DN>;
         };
@@ -140,7 +146,7 @@
 &kp TILDE  &kp EXCL      &kp AT        &kp HASH   &kp DLLR  &kp PRCNT                               &kp CARET &kp AMPS  &kp STAR   &kp LPAR   &kp RPAR      &kp BSPC
 &kp CLCK   &none         &none         &none      &kp COLON &kp UNDER                               &kp PLUS  &kp DQT   &none      &none      &none         &kp RET
 &kp LSHFT  &kp LG(LS(N4)) &kp LG(LS(S)) &none      &kp DEL   &kp BSPC &kp C_MUTE &mkp MB3          &none     &none     &none      &none      &kp UP        &kp RSHFT
-&kp LCTRL  &kp LALT      &kp LGUI      &none      &tg L_SYM2 &kp SPACE                              &kp SPACE &to L_NUM &none      &kp LEFT   &kp DOWN      &kp RIGHT
+&kp LCTRL  &kp LALT      &kp LGUI      &none      &tog L_SYM2 &kp SPACE                             &kp SPACE &to L_NUM &none      &kp LEFT   &kp DOWN      &kp RIGHT
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP &inc_dec_kp PG_UP PG_DN>;
         };
