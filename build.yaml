@@ -13,15 +13,17 @@
 #
 ---
 include:
+  # --- 左手側にZMK Studioを有効化 ---
+  - board: cornix_left
+    snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_ZMK_STUDIO=y
+    artifact-name: cornix_left_default_nosd
+
   # --- ドングル本体（画面描画をOFFにしてビルドを通す） ---
   - board: nice_nano/nrf52840/zmk
     shield: cornix_dongle_adapter
     cmake-args: -DCONFIG_ZMK_DISPLAY=n
     artifact-name: cornix_dongle_nosd
-
-  - board: cornix_left
-    # shield: cornix_indicator
-    artifact-name: cornix_left_default_nosd
 
   - board: cornix_ph_left
     # shield: cornix_indicator
