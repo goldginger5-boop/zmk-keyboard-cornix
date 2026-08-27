@@ -28,25 +28,25 @@
         };
     };
 
-    // --- Tap Dance 定義 ---
+// --- Tap Dance 定義 ---
     behaviors {
         td0: td_tab_mo1 {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <250>;
-            bindings = <&kp TAB>, <&mo L_NAV>;
+            bindings = <&kp TAB>, <&mo 1>;
         };
         td1: td_caps_tg1 {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <250>;
-            bindings = <&kp CAPSLOCK>, <&mo L_NAV>, <&tg L_NAV>;
+            bindings = <&kp CAPSLOCK>, <&mo 1>, <&tog 1>;
         };
         td2: td_bspc_mo1 {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <250>;
-            bindings = <&kp BSPC>, <&mo L_NAV>;
+            bindings = <&kp BSPC>, <&mo 1>;
         };
         td4: td_minus_rshift {
             compatible = "zmk,behavior-tap-dance";
@@ -64,16 +64,15 @@
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <250>;
-            bindings = <&kp INT_MUHENKAN>, <&mo L_SYM2>, <&tg L_SYM2>;
+            bindings = <&kp INT_MUHENKAN>, <&mo 3>, <&tog 3>;
         };
         td7: td_lang1_sym1 {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <250>;
-            bindings = <&kp INT_HENKAN>, <&mo L_SYM1>, <&tg L_SYM1>;
+            bindings = <&kp INT_HENKAN>, <&mo 2>, <&tog 2>;
         };
     };
-
     // --- Combos (同時押し) 定義 ---
     combos {
         compatible = "zmk,combos";
